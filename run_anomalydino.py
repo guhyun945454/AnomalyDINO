@@ -39,7 +39,7 @@ def parse_args():
     parser.add_argument("--shots", nargs='+', type=int, default=[1], #action=IntListAction,
                         help="List of shots to evaluate. Full-shot scenario is -1.")
     parser.add_argument("--num_seeds", type=int, default=1)
-    parser.add_argument("--mask_ref_images", default=False)
+    parser.add_argument("--mask_ref_images", type=bool, default=False)
     parser.add_argument("--just_seed", type=int, default=None)
     parser.add_argument('--save_examples', default=True, action=argparse.BooleanOptionalAction, help="Save example plots.")
     parser.add_argument("--eval_clf", default=True, action=argparse.BooleanOptionalAction, help="Evaluate anomaly detection performance.")

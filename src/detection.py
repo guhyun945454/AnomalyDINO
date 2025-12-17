@@ -198,7 +198,7 @@ def run_anomaly_detection(
                 # Save some example plots (3 per anomaly type)
                 if save_examples and idx < 3:
 
-                    fig, (ax1, ax2, ax3, ax4,) = plt.subplots(1, 4, figsize=(18, 4.5))
+                    fig, (ax1, ax2, ax3, ax4,) = plt.subplots(1, 4, figsize=(16, 4))
 
                     # plot test image, PCA + mask
                     ax1.imshow(image_test)
@@ -210,7 +210,7 @@ def run_anomaly_detection(
                     
                     # compute image level anomaly score (mean(top 1%) of patches = empirical tail value at risk for quantile 0.99)
                     score_top1p = mean_top1p(distances)
-                    ax4.axvline(score_top1p, color='r', linestyle='dashed', linewidth=1, label=round(score_top1p, 2))
+                    ax4.axvline(score_top1p, color='r', linestyle='dashed', linewidth=1, label=f"Anomaly Score: {score_top1p:.3f}")
                     ax4.legend()
                     ax4.hist(distances.flatten())
 
@@ -218,12 +218,12 @@ def run_anomaly_detection(
                     ax2.axis('off')
                     ax3.axis('off')
 
-                    ax1.title.set_text("Test")
-                    ax2.title.set_text("Test (PCA + Mask)")
+                    ax1.title.set_text("Test Image")
+                    ax2.title.set_text("Test Image (PCA + Mask)")
                     ax3.title.set_text("Patch Distances (1NN)")
-                    ax4.title.set_text("Hist of Distances")
+                    ax4.title.set_text("Histogram of Distances")
 
-                    plt.suptitle(f"Object: {object_name}, Type: {type_anomaly}, img = ...{image_test_path[-20:]}, object patches = {mask2.sum()}/{mask2.size}")
+                    plt.suptitle(f"Object: {object_name}, Type: {type_anomaly}, img_path = ...{image_test_path[-40:]}, filtered patches (by masking)/all patches = {mask2.sum()}/{mask2.size}")
 
                     plt.tight_layout()
                     plt.savefig(f"{plots_dir}/{object_name}/examples/example_{type_anomaly}_{idx}.png")

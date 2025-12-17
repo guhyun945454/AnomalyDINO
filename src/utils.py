@@ -44,7 +44,7 @@ def plot_ref_images(img_list, mask_list, vis_background_list, grid_size, save_pa
 
     n_aug = len(img_list)//len(img_names)
 
-    fig, axs = plt.subplots(k, 3, figsize=(10, 3.5*k))
+    fig, axs = plt.subplots(k, 3, figsize=(10, 3*k + 1.0))
     if k == 1:
         axs = axs.reshape(1, -1)
     for i in range(k):
